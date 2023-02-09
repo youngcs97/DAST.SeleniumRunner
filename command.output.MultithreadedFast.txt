@@ -1,0 +1,61 @@
+C:\Users\Admin\Documents\GitHub\SeleniumRunner>node app.MultithreadedFast.js
+scan-settings.request()
+scan-settings requested.
+scan-settings.statusCode: 200
+Captured CICD token = "a64729ef-426d-4450-b97f-b3f0bae43c39"
+Starting Fast with CICD token = "a64729ef-426d-4450-b97f-b3f0bae43c39" on port 8156
+Starting Fast with CICD token = "a64729ef-426d-4450-b97f-b3f0bae43c39" on port 8157
+Starting selenium-side-runner proxying on 8156
+0.0.0.0:8156
+Listening
+Starting selenium-side-runner proxying on 8157
+0.0.0.0:8157
+Listening
+info: Running test Logon and Check Activity
+info: Building driver for chrome
+info: Running test Logon and Check Activity
+info: Building driver for chrome
+  console.log
+     The ChromeDriver could not be found on the current PATH, trying Selenium Manager
+      at new ServiceBuilder (../selenium-webdriver/chrome.js:163:15)
+  console.log
+     The ChromeDriver could not be found on the current PATH, trying Selenium Manager
+      at new ServiceBuilder (../selenium-webdriver/chrome.js:163:15)
+DevTools listening on ws://127.0.0.1:63524/devtools/browser/87e3f1ed-3e53-4587-924c-44593498adcd
+DevTools listening on ws://127.0.0.1:63525/devtools/browser/b21517e5-cc77-4412-9e7d-2cc6187e0460
+info: Driver has been built for chrome
+info: Driver has been built for chrome
+[2/9/2023 9:30:25 AM] GET http://zero.webappsecurity.com/logout.html Response: 302, 248 bytes.
+[2/9/2023 9:30:25 AM] GET http://zero.webappsecurity.com/logout.html Response: 302, 248 bytes.
+[2/9/2023 9:30:25 AM] GET http://zero.webappsecurity.com/index.html Response: 200, 12769 bytes.
+[2/9/2023 9:30:25 AM] GET http://zero.webappsecurity.com/index.html Response: 200, 12769 bytes.
+[2/9/2023 9:30:26 AM] GET http://zero.webappsecurity.com/ Response: 200, 12769 bytes.
+[2/9/2023 9:30:26 AM] GET http://zero.webappsecurity.com/ Response: 200, 12769 bytes.
+[2/9/2023 9:30:26 AM] GET http://zero.webappsecurity.com/login.html Response: 200, 7601 bytes.
+[2/9/2023 9:30:26 AM] GET http://zero.webappsecurity.com/login.html Response: 200, 7601 bytes.
+[2/9/2023 9:30:26 AM] POST http://zero.webappsecurity.com/signin.html Response: 302, 359 bytes.
+[2052:1104:0209/093026.467:ERROR:ssl_client_socket_impl.cc(985)] handshake failed; returned -1, SSL error code 1, net_error -113
+[2/9/2023 9:30:26 AM] GET http://zero.webappsecurity.com/auth/accept-certs.html?user_token=f9726872-3104-4547-8b9b-37b768dcfaee Response: 302, 339 bytes.
+[2052:1104:0209/093026.527:ERROR:ssl_client_socket_impl.cc(985)] handshake failed; returned -1, SSL error code 1, net_error -113
+[2/9/2023 9:30:26 AM] GET http://zero.webappsecurity.com/bank/account-summary.html Response: 200, 14990 bytes.
+[2/9/2023 9:30:26 AM] POST http://zero.webappsecurity.com/signin.html Response: 302, 359 bytes.
+[10756:15416:0209/093026.904:ERROR:ssl_client_socket_impl.cc(985)] handshake failed; returned -1, SSL error code 1, net_error -113
+[2/9/2023 9:30:26 AM] GET http://zero.webappsecurity.com/auth/accept-certs.html?user_token=e3a46f8b-05f6-4839-9eea-7003a0805549 Response: 302, 339 bytes.
+[10756:15416:0209/093026.972:ERROR:ssl_client_socket_impl.cc(985)] handshake failed; returned -1, SSL error code 1, net_error -113
+info: Finished test Logon and Check Activity Success
+[2/9/2023 9:30:27 AM] GET http://zero.webappsecurity.com/bank/account-summary.html Response: 200, 14990 bytes.
+selenium-side-runner exited: code 0
+Stopping Fast port 8156
+info: Finished test Logon and Check Activity Success
+Fast stop exited: code 0
+selenium-side-runner exited: code 0
+Stopping Fast port 8157
+Fast stop exited: code 0
+ * Captured Workflow WebMacro file uploaded: 0c06cfba-614c-49a9-9827-51011d685f1e.webmacro. Assigned fileId: 30
+ * FAST Workflow scan is queued. Assigned scanId: 22
+Fast start exited: code 0
+ * Captured Workflow WebMacro file uploaded: 687f378c-60b3-4934-b96b-237327a70e66.webmacro. Assigned fileId: 29
+ * FAST Workflow scan is queued. Assigned scanId: 23
+Fast start exited: code 0
+
+C:\Users\Admin\Documents\GitHub\SeleniumRunner>  

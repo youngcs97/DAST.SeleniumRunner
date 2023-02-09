@@ -1,0 +1,22 @@
+{
+  "name": "seleniumrunner",
+  "version": "1.0.0",
+  "description": "Runs Selenium IDE files against a proxy",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chris Young {http://cyoung.us}",
+  "license": "ISC",
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "childprocess": "^2.0.2",
+    "https-proxy-agent": "^5.0.1",
+    "request": "^2.88.2",
+    "selenium-side-runner": "^4.0.0-alpha.36",
+    "selenium-webdriver": "^4.7.1"
+  },
+  "devDependencies": {
+    "chromedriver": "^109.0.0"
+  }
+}

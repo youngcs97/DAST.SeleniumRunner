@@ -1,0 +1,5 @@
+proxyType: manual
+proxyOptions:
+  http: localhost:8156
+  bypass:
+    - http://*.net

@@ -1,0 +1,145 @@
+{
+  "id": "40d45983-dc9e-4f1a-a12d-65b47deed70c",
+  "version": "2.0",
+  "name": "Zero Bank",
+  "url": "http://zero.webappsecurity.com",
+  "tests": [{
+    "id": "725943e2-3b7d-4487-bdad-e7c346e3663b",
+    "name": "Logon and Check Activity",
+    "commands": [{
+      "id": "ef8a6ee7-7980-40fc-b4a3-861af2ac33f0",
+      "comment": "",
+      "command": "open",
+      "target": "/logout.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0071a1de-e90c-450d-a632-a67737f6a625",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8ebe12ce-a22e-4e85-ab34-63daff8e5cc9",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "css=.disclaimer",
+      "targets": [],
+      "value": "5000"
+    }, {
+      "id": "7200e92d-3286-49ca-98f4-e4e25715e730",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=//button[@id='signin_button']",
+      "targets": [
+        ["id=signin_button", "id"],
+        ["css=#signin_button", "css:finder"],
+        ["xpath=//button[@id='signin_button']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Signin')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7e721163-379e-4d27-8da6-0d8133267967",
+      "comment": "",
+      "command": "type",
+      "target": "id=user_login",
+      "targets": [
+        ["id=user_login", "id"],
+        ["name=user_login", "name"],
+        ["css=#user_login", "css:finder"],
+        ["xpath=//input[@id='user_login']", "xpath:attributes"],
+        ["xpath=//form[@id='login_form']/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "username"
+    }, {
+      "id": "34dc6f45-f8f1-4d4f-8087-55578bafe8cc",
+      "comment": "",
+      "command": "type",
+      "target": "id=user_password",
+      "targets": [
+        ["id=user_password", "id"],
+        ["name=user_password", "name"],
+        ["css=#user_password", "css:finder"],
+        ["xpath=//input[@id='user_password']", "xpath:attributes"],
+        ["xpath=//form[@id='login_form']/div/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "password"
+    }, {
+      "id": "8eec0318-4eef-4d13-a4ec-f57e76ee91f9",
+      "comment": "",
+      "command": "click",
+      "target": "id=user_remember_me",
+      "targets": [
+        ["id=user_remember_me", "id"],
+        ["name=user_remember_me", "name"],
+        ["css=#user_remember_me", "css:finder"],
+        ["xpath=//input[@id='user_remember_me']", "xpath:attributes"],
+        ["xpath=//form[@id='login_form']/div/div[3]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0fd08e5a-96c1-4055-a0b7-91f96ab31e24",
+      "comment": "",
+      "command": "click",
+      "target": "name=submit",
+      "targets": [
+        ["name=submit", "name"],
+        ["css=.btn", "css:finder"],
+        ["xpath=//input[@name='submit']", "xpath:attributes"],
+        ["xpath=//form[@id='login_form']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8b85d52b-55d9-4926-9c06-7c041b8b42d3",
+      "comment": "",
+      "command": "open",
+      "target": "/bank/account-summary.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0da9f106-405b-4480-ba0e-63fb30f80294",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "css=.disclaimer",
+      "targets": [],
+      "value": "5000"
+    }, {
+      "id": "d7026b0d-37e5-4a5f-be16-277630d26f85",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.board-header:nth-child(1)",
+      "targets": [],
+      "value": "Cash Accounts"
+    }, {
+      "id": "04468d15-13f2-4c0a-8bef-1df9ece26c30",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.board-header:nth-child(3)",
+      "targets": [],
+      "value": "Investment Accounts"
+    }, {
+      "id": "d78aed80-ac0a-4b4c-b95d-d7dc1ea7fdb8",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.board-header:nth-child(5)",
+      "targets": [],
+      "value": "Credit Accounts"
+    }]
+  }],
+  "suites": [{
+    "id": "cdefe95b-e689-4f07-9e08-cae3b4220876",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["725943e2-3b7d-4487-bdad-e7c346e3663b"]
+  }],
+  "urls": ["http://zero.webappsecurity.com/"],
+  "plugins": []
+}

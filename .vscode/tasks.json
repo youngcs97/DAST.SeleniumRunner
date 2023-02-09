@@ -1,0 +1,55 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "echo",
+        "type": "shell",
+        "command": "echo Hello"
+      },
+      {
+        "label": "Node Run",
+        "type": "process",
+        "presentation": {
+          "panel": "new"
+        },
+        "command": "node.exe",
+        "windows": {
+          "command": "node.exe"
+        },
+        "osx": {
+          "command": "node"
+        },
+        "linux": {
+          "command": "node"
+        },
+        "args": [
+          "${fileBasename}"
+        ],
+        "problemMatcher": []
+      },
+      
+      {
+        "label": "ProxyRecorder",
+        "type": "process",
+        "presentation": {
+          "panel": "new"
+        },
+        "command": "${env:DEVWEB_PATH}/ProxyRecorder",
+        "windows": {
+          "command": "${env:DEVWEB_PATH}\\ProxyRecorder.exe"
+        },
+        "osx": {
+          "command": "${env:DEVWEB_PATH}/ProxyRecorder"
+        },
+        "linux": {
+          "command": "${env:DEVWEB_PATH}/ProxyRecorder"
+        },
+        "args": [
+          "${workspaceFolder}/ProxyRecorder.har"
+        ],
+        "problemMatcher": []
+      }
+    ]
+}
