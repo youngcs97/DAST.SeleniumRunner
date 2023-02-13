@@ -9,13 +9,13 @@ This project shows how to use the Selenium Side Runner (execution platform for n
 
 The concepts:
 
---The project contains an example SIDE file:  Zerobank.side
---This SIDE file connects to http://zero.webappsecurity.com (Fortify's example website -- contains many security flaws to demonstrate DAST findings)
---Once connected, it logs into the fictitious Online Banking app, and then clicks the "Account Summary," verifying the presence of various DOM elements on the page.
+- The project contains an example SIDE file:  Zerobank.side
+- This SIDE file connects to http://zero.webappsecurity.com (Fortify's example website -- contains many security flaws to demonstrate DAST findings)
+- Once connected, it logs into the fictitious Online Banking app, and then clicks the "Account Summary," verifying the presence of various DOM elements on the page.
 
---Fortify family products ship with a man-in-middle proxy server that captures traffic for use in a workflow-driven scan (executable name:  Fast.exe)
---The app.MultithreadedFast.js and .py files spool up two simultaneous instances of FAST proxy, execute the Zerobank.side file pointing at the FAST listener ports, then shutdown the FAST proxy once the Selenium script has fully executed.
---This in turn will kick off a DAST scan using REST API's in SSC/Scan Central
+- Fortify family products ship with a man-in-middle proxy server that captures traffic for use in a workflow-driven scan (executable name:  Fast.exe)
+- The app.MultithreadedFast.js and .py files spool up two simultaneous instances of FAST proxy, execute the Zerobank.side file pointing at the FAST listener ports, then shutdown the FAST proxy once the Selenium script has fully executed.
+- This in turn will kick off a DAST scan using REST API's in SSC/Scan Central
 
 Although this example specifically uses SSC/ScanCentral, the concepts could apply to any of the Fortify products:
 
