@@ -1,0 +1,104 @@
+C:\Users\Admin\Documents\GitHub\SeleniumRunner>python app.MultithreadedFast.py
+main() started at 10:42:11
+Using cicdToken = 'e9b5e408-1b75-46aa-bb85-5f49624f56e0'
+startFast(8156)
+startFast(8157)
+fast(8156)
+fast(8157)
+8156: 0.0.0.0:8156
+8156: Listening
+startSelenium(8156)
+8157: 0.0.0.0:8157
+8157: Listening
+startSelenium(8157)
+selenium(8156)
+selenium(8157)
+
+DevTools listening on ws://127.0.0.1:63696/devtools/browser/42cfae15-51ee-48bb-a6c3-a6e52be0c00b
+
+DevTools listening on ws://127.0.0.1:63697/devtools/browser/0cb384fe-210e-428f-93d8-42475e5674de
+8156: [2/12/2023 10:42:33 AM] GET http://zero.webappsecurity.com/logout.html Response: 302, 248 bytes.
+8157: [2/12/2023 10:42:33 AM] GET http://zero.webappsecurity.com/logout.html Response: 302, 248 bytes.
+8157: [2/12/2023 10:42:33 AM] GET http://zero.webappsecurity.com/index.html Response: 200, 12769 bytes.
+8156: [2/12/2023 10:42:33 AM] GET http://zero.webappsecurity.com/index.html Response: 200, 12769 bytes.
+8157: [2/12/2023 10:42:34 AM] GET http://zero.webappsecurity.com/ Response: 200, 12769 bytes.
+8156: [2/12/2023 10:42:34 AM] GET http://zero.webappsecurity.com/ Response: 200, 12769 bytes.
+8157: [2/12/2023 10:42:34 AM] GET http://zero.webappsecurity.com/login.html Response: 200, 7601 bytes.
+8156: [2/12/2023 10:42:34 AM] GET http://zero.webappsecurity.com/login.html Response: 200, 7601 bytes.
+8157: [2/12/2023 10:42:34 AM] POST http://zero.webappsecurity.com/signin.html Response: 302, 359 bytes.
+8156: [2/12/2023 10:42:34 AM] POST http://zero.webappsecurity.com/signin.html Response: 302, 359 bytes.
+[2984:10132:0212/104234.490:ERROR:ssl_client_socket_impl.cc(985)] handshake failed; returned -1, SSL error code 1, net_error -113
+8157: [2/12/2023 10:42:34 AM] GET http://zero.webappsecurity.com/auth/accept-certs.html?user_token=46a1f7af-77c3-4881-9fa8-50035d5eb48b Response: 302, 339 bytes.
+8156: [2/12/2023 10:42:34 AM] GET http://zero.webappsecurity.com/auth/accept-certs.html?user_token=e1974b4e-3cd1-465f-9e3c-b184eb6174ad Response: 302, 339 bytes.
+[8576:19188:0212/104234.535:ERROR:ssl_client_socket_impl.cc(985)] handshake failed; returned -1, SSL error code 1, net_error -113
+[2984:10132:0212/104234.557:ERROR:ssl_client_socket_impl.cc(985)] handshake failed; returned -1, SSL error code 1, net_error -113
+[8576:19188:0212/104234.601:ERROR:ssl_client_socket_impl.cc(985)] handshake failed; returned -1, SSL error code 1, net_error -113
+8157: [2/12/2023 10:42:34 AM] GET http://zero.webappsecurity.com/bank/account-summary.html Response: 200, 14990 bytes.
+8156: [2/12/2023 10:42:34 AM] GET http://zero.webappsecurity.com/bank/account-summary.html Response: 200, 14990 bytes.
+['selenium-side-runner --proxy-type=manual --proxy-options="http=localhost:8156 bypass=[https://*.net]" "ZeroBank.side"' exited with 0]
+[stdout]
+info: Running test Logon and Check Activity
+info: Building driver for chrome
+  console.log
+     The ChromeDriver could not be found on the current PATH, trying Selenium Manager
+
+      at new ServiceBuilder (../selenium-webdriver/chrome.js:163:15)
+
+info: Driver has been built for chrome
+info: Finished test Logon and Check Activity Success
+PASS ../../../AppData/Roaming/npm/node_modules/selenium-side-runner/dist/main.test.js (9.483 s)
+  Running project Zero Bank
+    Running suite Default Suite
+      √ Running test Logon and Check Activity (4879 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        10.2 s
+Ran all test suites within paths "C:\Users\Admin\AppData\Roaming\npm\node_modules\selenium-side-runner\dist\main.test.js".
+
+stopFast(8156)
+stop(8156)
+doneSelenium(<Task finished name='work 8156' coro=<selenium() done, defined at C:\Users\Admin\Documents\GitHub\SeleniumRunner\app.MultithreadedFast.py:60> result=None>,8156)
+['fast.exe -p 8156 -s' exited with 0]
+doneStop(<Task finished name='stop 8156' coro=<stop() done, defined at C:\Users\Admin\Documents\GitHub\SeleniumRunner\app.MultithreadedFast.py:89> result=None>,8156)
+['selenium-side-runner --proxy-type=manual --proxy-options="http=localhost:8157 bypass=[https://*.net]" "ZeroBank.side"' exited with 0]
+[stdout]
+info: Running test Logon and Check Activity
+info: Building driver for chrome
+  console.log
+     The ChromeDriver could not be found on the current PATH, trying Selenium Manager
+
+      at new ServiceBuilder (../selenium-webdriver/chrome.js:163:15)
+
+info: Driver has been built for chrome
+info: Finished test Logon and Check Activity Success
+PASS ../../../AppData/Roaming/npm/node_modules/selenium-side-runner/dist/main.test.js (9.629 s)
+  Running project Zero Bank
+    Running suite Default Suite
+      √ Running test Logon and Check Activity (5026 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        10.281 s
+Ran all test suites within paths "C:\Users\Admin\AppData\Roaming\npm\node_modules\selenium-side-runner\dist\main.test.js".
+
+stopFast(8157)
+stop(8157)
+doneSelenium(<Task finished name='work 8157' coro=<selenium() done, defined at C:\Users\Admin\Documents\GitHub\SeleniumRunner\app.MultithreadedFast.py:60> result=None>,8157)
+['fast.exe -p 8157 -s' exited with 0]
+doneStop(<Task finished name='stop 8157' coro=<stop() done, defined at C:\Users\Admin\Documents\GitHub\SeleniumRunner\app.MultithreadedFast.py:89> result=None>,8157)
+8157:  * Captured Workflow WebMacro file uploaded: 42128f85-4f6f-43b4-ada2-c0db09e31d6a.webmacro. Assigned fileId: 49
+8157:  * FAST Workflow scan is queued. Assigned scanId: 41
+['fast.exe -CIToken NzA2YWFmNTktYTE0Ny00ZjRmLTgwM2EtODhjMDE4ZTBjOWMy -CICDToken e9b5e408-1b75-46aa-bb85-5f49624f56e0 -u http://localhost:64814/api -p 8157 -n "Example Scan port 8157"' exited with 0]
+doneFast(<Task finished name='fast 8157' coro=<fast() done, defined at C:\Users\Admin\Documents\GitHub\SeleniumRunner\app.MultithreadedFast.py:28> result=None>,8157)
+8156:  * Captured Workflow WebMacro file uploaded: ea70372d-bfe7-49a4-a079-df5be511f622.webmacro. Assigned fileId: 48
+8156:  * FAST Workflow scan is queued. Assigned scanId: 42
+['fast.exe -CIToken NzA2YWFmNTktYTE0Ny00ZjRmLTgwM2EtODhjMDE4ZTBjOWMy -CICDToken e9b5e408-1b75-46aa-bb85-5f49624f56e0 -u http://localhost:64814/api -p 8156 -n "Example Scan port 8156"' exited with 0]
+doneFast(<Task finished name='fast 8156' coro=<fast() done, defined at C:\Users\Admin\Documents\GitHub\SeleniumRunner\app.MultithreadedFast.py:28> result=None>,8156)
+
+main() finished at 10:42:44
+main() elapsed time: 33.3681
+
+C:\Users\Admin\Documents\GitHub\SeleniumRunner>
