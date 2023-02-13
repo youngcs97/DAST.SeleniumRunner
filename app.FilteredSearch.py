@@ -1,10 +1,5 @@
-import asyncio      # https://docs.python.org/3/library/asyncio.html#module-asyncio
 import json
-import time
 import requests
-from codetiming import Timer
-from functools import partial
-
 
 # Fetch config from config.json
 def config():
@@ -24,12 +19,6 @@ def scanSettingsByName(url, token, name):
     s["filteredItems"]=len(i)
     return s
 
-
 c = config()
 s = scanSettingsByName(c["url"], c["token"], "Hello Settings 2")
 print(f"{s}")
-    
-
-
-
-
