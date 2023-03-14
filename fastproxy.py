@@ -45,7 +45,7 @@ INTERNET_SETTINGS_REG_KEY = "HKCU\Software\Microsoft\Windows\CurrentVersion\Inte
 
 class Browser(webdriver.Chrome):                # returns Selenium webdriver object
 
-    def __init__(self, *args, settings: Settings, debug: bool=False, **kwargs):
+    def __init__(self, settings: Settings, debug: bool=False, **kwargs):
         def info(message, end=None):            # encapsulating print messages (easy switch to better logging)
             if debug: print(message, end=end)
         self.__info = info
