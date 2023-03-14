@@ -15,8 +15,8 @@ import subprocess
 port = 8159     # Fast listener port
 # Settings class (data structure container) used to pass the FAST settings upon fastproxy.Browser() class init.
     # Note the "chained" proxy pointer on port 8160 -- This code will implement three hops through a proxy chain:  Browser -> FAST proxy on port 8159 -> Separate 8160 proxy listener created from above -> Internet
-fast = fastproxy.Settings("NzA2YWFmNTktYTE0Ny00ZjRmLTgwM2EtODhjMDE4ZTBjOWMy","e9b5e408-1b75-46aa-bb85-5f49624f56e0",port,f"Example Scan {port}","http://localhost:64814/api", "127.0.0.1:8160")
-browser = fastproxy.Browser(fast, debug=True) 
+fast = fastproxy.Settings("NzA2YWFmNTktYTE0Ny00ZjRmLTgwM2EtODhjMDE4ZTBjOWMy","e9b5e408-1b75-46aa-bb85-5f49624f56e0",f"Example Scan {port}",port,"http://localhost:64814/api", "127.0.0.1:8160")
+browser = fastproxy.Browser(settings=fast, debug=True) 
 
 # This is the Selenium execution
 browser.get("http://zero.webappsecurity.com")
