@@ -29,14 +29,18 @@ class Settings:
     .CICDToken    - Guid scan settings DAST token.
     
     .CIToken      - Base64 Authentication DAST token.
+
+    .openssl      - Use OpenSSL ciphers for DAST API.            
+        Example:  -openssl
     """
-    def __init__(self, CIToken: str, CICDToken: str, name: str = None, port: int=8085, url: str="http://localhost:64814/api", proxy: str=None):
+    def __init__(self, CIToken: str, CICDToken: str, name: str = None, port: int=8085, url: str="http://localhost:64814/api", proxy: str=None, openssl: bool=False):
         self.CIToken = CIToken
         self.CICDToken = CICDToken
         self.port = port
         self.name = name if (name!=None) else f"fast_scan_on_port_{port}"
         self.url = url
         self.proxy = proxy
+        self.openssl = openssl
 
 DEFAULT_FAST_IDLE_TIMEOUT = 10
 DEFAULT_FAST_TOTAL_TIMEOUT = 60
@@ -45,7 +49,7 @@ INTERNET_SETTINGS_REG_KEY = "HKCU\Software\Microsoft\Windows\CurrentVersion\Inte
 
 class Browser(webdriver.Chrome):                # returns Selenium webdriver object
 
-    def __init__(self, settings: Settings, debug: bool=False, **kwargs):
+    def __init__(self, settings: Settings, debug: bool=False, manualseleniumproxy: bool=False, **kwargs):
         def info(message, end=None):            # encapsulating print messages (easy switch to better logging)
             if debug: print(message, end=end)
         self.__info = info
@@ -101,11 +105,11 @@ class Browser(webdriver.Chrome):                # returns Selenium webdriver obj
             s = settings
             c = f"fast.exe -CIToken {s.CIToken} -CICDToken {s.CICDToken} -u \"{s.url}\" -p {s.port} -n \"{s.name}\""
             if s.proxy is not None: c+=f" -ps \"{s.proxy}\""
-            #c = ("ping 127.0.0.1", "seq=0")
+            if s.openssl: c+=f" -openssl"
             return c
         c = fast()              
         info(f"cmd: {c}")             
-        p = subprocess.Popen(c, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, encoding="utf-8", errors="ignore")
+        p = subprocess.Popen(c, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         self.__process = p
         info(f"pid: {p.pid}")
 
@@ -120,14 +124,14 @@ class Browser(webdriver.Chrome):                # returns Selenium webdriver obj
         # daemonic so that it can survive through garbage collection
         #   be cafeful using self.properties so not to interfere w/collection
         o = p.stdout
-        self.read = None
+        self.__read = None
         def readerthread():
             def read():         
                 d = os.read(o.fileno(), 65536)
                 if len(d) > 0 : 
+                    l.acquire()     # Lock against other threads
                     d = d.decode("utf-8")
                     info(d, end="")
-                    l.acquire()     # Lock against other threads
                     q.append(d)
                     l.release()
                 if d == b"":
@@ -136,17 +140,18 @@ class Browser(webdriver.Chrome):                # returns Selenium webdriver obj
             def reader():
                 while read()!=b"":
                     time.sleep(.5)
-            self.read = read        # saving this def for future use @end
+            self.__read = read        # saving this def for future use @end
             r = Thread(target=reader, daemon=True)
             r.start()
             return r
-        self.readerthread = readerthread()
+        self.__readerthread = readerthread()
 
         # Checker for process still running - returns None(still alive) or returncode
         def poll():
             x = p.poll()
             if x != None:
-                self.readerthread.join()
+                try: self.__readerthread.join(timeout=10) 
+                except: pass
             return x
 
         # Main background 
@@ -155,6 +160,9 @@ class Browser(webdriver.Chrome):                # returns Selenium webdriver obj
         self.fastidletimeout = DEFAULT_FAST_IDLE_TIMEOUT
         self.fasttotaltimeout = DEFAULT_FAST_TOTAL_TIMEOUT
         z = Event()         # signals FAST is listening - handover to Selenium execution code
+        y = Event()         # signals shutdown should occur
+        self.__shutdown = y
+        self.__fastshutdown = None  # results of "fast.exe -s" run()
         def background():
             def diff(v,t):  # check timeout exceeded
                 return False if (t==None) else (time.perf_counter()-v > t)
@@ -166,12 +174,13 @@ class Browser(webdriver.Chrome):                # returns Selenium webdriver obj
                     l.acquire()                 # lock for clearing
                     for d in q:
                         if "Listening" in d: z.set()    # flag event when monitor sees "Listening"
-                        s.append(d)     # copy to archive
+                        s.append(d)             # copy to archive
                     q.clear()                   # clear data
                     l.release()
-                if poll() != None : break
                 if diff(b, self.fasttotaltimeout) : info("Total timeout"); break    # total runtime timeout
-                if diff(c, self.fastidletimeout) : info("Idle timeout"); break     # idle timeout
+                if diff(c, self.fastidletimeout) : info("Idle timeout"); break      # idle timeout
+                if y.is_set() : info("Shutdown requested"); break                   # shutdown requested
+                if poll() != None : break
                 time.sleep(.5)
         b = Thread(target=background, daemon=False)
         b.start()
@@ -182,11 +191,12 @@ class Browser(webdriver.Chrome):                # returns Selenium webdriver obj
         # Proxy Settings
         info("Setting proxy settings for [Browser] object")  
         def capabilities():
-            p = Proxy()                                     
-            p.proxy_type = ProxyType.MANUAL
-            p.http_proxy = f"127.0.0.1:{settings.port}" # proxy is localhost:port matching the FAST proxy port
             c = DesiredCapabilities.CHROME.copy()
-            p.add_to_capabilities(c)
+            if manualseleniumproxy: # set True for manual proxy, otherwise use selenium default
+                p = Proxy()                                     
+                p.proxy_type = ProxyType.MANUAL
+                p.http_proxy = f"127.0.0.1:{settings.port}" # proxy is localhost:port matching the FAST proxy port
+                p.add_to_capabilities(c)
             c['acceptInsecureCerts'] = True
             return c
     
@@ -195,24 +205,31 @@ class Browser(webdriver.Chrome):                # returns Selenium webdriver obj
         print(f'webdriver.Chrome().__init__({kwargs})')
         super().__init__(**kwargs)
 
-
-    def __del__(self):        
+    def stopfast(self):
         def info(): pass
         info = self.__info
-        info(f"Browser.__del__()")
-
-        # stop FAST proxy on garbage collection
+        # stop FAST proxy
+        self.__shutdown.set()
         p = self.__settings.port
         info(f"Stop FAST ({p})")
         c = f"fast.exe -p {p} -s"
         info(f"cmd: {c}") 
         r = subprocess.run(c, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, encoding="utf-8", errors="ignore")
         info(f"FAST stop returned: {r.returncode}")
+        self.__fastshutdown = r
+
+    def __del__(self):        
+        def info(): pass
+        info = self.__info
+        info(f"Browser.__del__()")
+
+        # stop fast on garbage collection
+        if self.__fastshutdown is None: self.stopfast()
 
         # loop until the process completes
         while True:
             try:
-                self.read()
+                self.__read()
             except: pass
             if self.__process.poll()!=None: break
             time.sleep(.5)
