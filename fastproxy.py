@@ -156,7 +156,7 @@ class Browser(webdriver.Chrome):                # returns Selenium webdriver obj
 
         # Main background 
         # Idle/Total timeouts control timed thread shutdown (allowing garbage collection)
-        # Idle (length since last stdout data) Total (beginning if FAST startup) seconds
+        # Idle (length since last stdout data) / Total (beginning of FAST startup) seconds
         self.fastidletimeout = DEFAULT_FAST_IDLE_TIMEOUT
         self.fasttotaltimeout = DEFAULT_FAST_TOTAL_TIMEOUT
         z = Event()         # signals FAST is listening - handover to Selenium execution code
@@ -202,7 +202,7 @@ class Browser(webdriver.Chrome):                # returns Selenium webdriver obj
     
         # Update keyword args/give access to parent class members (webdriver.Chrome)
         kwargs.update(desired_capabilities=capabilities())
-        print(f'webdriver.Chrome().__init__({kwargs})')
+        info(f'webdriver.Chrome().__init__({kwargs})')
         super().__init__(**kwargs)
 
     def stopfast(self):
